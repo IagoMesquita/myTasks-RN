@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {
   Platform,
   SafeAreaView,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -9,8 +10,24 @@ import {
 } from 'react-native';
 import {StyleSheet} from 'react-native';
 
+interface ITask {
+  id: string;
+  title: string;
+}
+
 export function Home() {
   const [newTask, setNewTask] = useState('');
+  const [tasks, setTasks] = useState<ITask[]>([]);
+
+  const handleNewTask = () => {
+    const data = {
+      id: String(new Date().getTime()),
+      title: newTask ? newTask : 'Tarefa Fazia',
+    };
+
+    setTasks([...tasks, data]);
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -22,11 +39,22 @@ export function Home() {
           placeholder="Nova tarefa..."
           placeholderTextColor="#555"
         />
-        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+        <TouchableOpacity
+          onPress={handleNewTask}
+          activeOpacity={0.7}
+          style={styles.button}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
         <Text style={styles.titleTask}>Minhas Tarefas</Text>
-        <Text>{newTask}</Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {tasks.map(task => {
+            return (
+              <TouchableOpacity key={task.id} style={styles.buttonTask}>
+                <Text style={styles.textTask}>{task.title}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
@@ -70,6 +98,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#121214',
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  buttonTask: {
+    backgroundColor: '#29292E',
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 50,
+    alignItems: 'center',
+  },
+  textTask: {
+    color: '#F1F1F1',
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });
