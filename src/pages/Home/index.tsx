@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Platform,
   SafeAreaView,
@@ -10,14 +10,23 @@ import {
 import {StyleSheet} from 'react-native';
 
 export function Home() {
+  const [newTask, setNewTask] = useState('');
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome, Dev!</Text>
-        <TextInput style={styles.input} />
+        <TextInput
+          onChangeText={setNewTask}
+          style={styles.input}
+          selectionColor="#EBA417"
+          placeholder="Nova tarefa..."
+          placeholderTextColor="#555"
+        />
         <TouchableOpacity activeOpacity={0.7} style={styles.button}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
+        <Text style={styles.titleTask}>Minhas Tarefas</Text>
+        <Text>{newTask}</Text>
       </View>
     </SafeAreaView>
   );
@@ -37,6 +46,12 @@ const styles = StyleSheet.create({
     color: '#F1F1F1',
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  titleTask: {
+    color: '#F1F1F1',
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 50,
   },
   input: {
     backgroundColor: '#29292E',
