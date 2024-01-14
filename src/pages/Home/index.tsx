@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  FlatList,
   Platform,
   SafeAreaView,
   Text,
@@ -9,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import {StyleSheet} from 'react-native';
+import {TaskList} from '../../components/TaskList';
 
 interface ITask {
   id: string;
@@ -46,25 +46,7 @@ export function Home() {
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
         <Text style={styles.titleTask}>Minhas Tarefas</Text>
-        <FlatList
-          data={tasks}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <TouchableOpacity key={item.id} style={styles.buttonTask}>
-              <Text style={styles.textTask}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-        />
-
-        {/* <ScrollView showsVerticalScrollIndicator={false}>
-          {tasks.map(task => {
-            return (
-              <TouchableOpacity key={task.id} style={styles.buttonTask}>
-                <Text style={styles.textTask}>{task.title}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView> */}
+        <TaskList tasks={tasks} />
       </View>
     </SafeAreaView>
   );
@@ -108,18 +90,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#121214',
     fontSize: 18,
-    fontWeight: 'bold',
-  },
-  buttonTask: {
-    backgroundColor: '#29292E',
-    padding: 10,
-    marginTop: 10,
-    borderRadius: 50,
-    alignItems: 'center',
-  },
-  textTask: {
-    color: '#F1F1F1',
-    fontSize: 20,
     fontWeight: 'bold',
   },
 });
