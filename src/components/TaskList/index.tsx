@@ -1,10 +1,6 @@
 import {StyleSheet, Text, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
-
-interface ITask {
-  id: string;
-  title: string;
-}
+import {ITask} from '../../Types/ITasks';
 
 interface TaskListProps {
   tasks: ITask[];
