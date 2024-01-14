@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {
+  FlatList,
   Platform,
   SafeAreaView,
-  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -46,7 +46,17 @@ export function Home() {
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
         <Text style={styles.titleTask}>Minhas Tarefas</Text>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <FlatList
+          data={tasks}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <TouchableOpacity key={item.id} style={styles.buttonTask}>
+              <Text style={styles.textTask}>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
+
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
           {tasks.map(task => {
             return (
               <TouchableOpacity key={task.id} style={styles.buttonTask}>
@@ -54,7 +64,7 @@ export function Home() {
               </TouchableOpacity>
             );
           })}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </SafeAreaView>
   );
