@@ -1,9 +1,9 @@
+import React from 'react';
 import {StyleSheet, Text, FlatList, TouchableOpacity} from 'react-native';
-import React, {useContext} from 'react';
-import TasksContext from '../../data/Context/TasksContext';
+import {useTaskList} from '../../data/Hooks/useTaskList';
 
 export function TaskList() {
-  const {tasks} = useContext(TasksContext);
+  const {tasks} = useTaskList();
 
   return (
     <FlatList
