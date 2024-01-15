@@ -1,12 +1,10 @@
 import {StyleSheet, Text, FlatList, TouchableOpacity} from 'react-native';
-import React from 'react';
-import {ITask} from '../../Types/ITasks';
+import React, {useContext} from 'react';
+import TasksContext from '../../data/Context/TasksContext';
 
-interface TaskListProps {
-  tasks: ITask[];
-}
+export function TaskList() {
+  const {tasks} = useContext(TasksContext);
 
-export function TaskList({tasks}: TaskListProps) {
   return (
     <FlatList
       data={tasks}

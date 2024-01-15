@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Platform,
   SafeAreaView,
@@ -9,15 +9,13 @@ import {
 } from 'react-native';
 import {StyleSheet} from 'react-native';
 import {TaskList} from '../../components/TaskList';
-
-interface ITask {
-  id: string;
-  title: string;
-}
+import TasksContext from '../../data/Context/TasksContext';
+// import {ITask} from '../../Types/ITasks';
 
 export function Home() {
   const [newTask, setNewTask] = useState('');
-  const [tasks, setTasks] = useState<ITask[]>([]);
+  // const [tasks, setTasks] = useState<ITask[]>([]);
+  const {addTask} = useContext(TasksContext);
 
   const handleNewTask = () => {
     const data = {
@@ -25,7 +23,7 @@ export function Home() {
       title: newTask ? newTask : 'Tarefa Fazia',
     };
 
-    setTasks([...tasks, data]);
+    addTask(data);
   };
 
   return (
@@ -46,7 +44,7 @@ export function Home() {
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
         <Text style={styles.titleTask}>Minhas Tarefas</Text>
-        <TaskList tasks={tasks} />
+        <TaskList />
       </View>
     </SafeAreaView>
   );
