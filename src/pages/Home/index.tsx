@@ -9,23 +9,21 @@ import {
 } from 'react-native';
 import {StyleSheet} from 'react-native';
 import {TaskList} from '../../components/TaskList';
-
-interface ITask {
-  id: string;
-  title: string;
-}
+import {useTaskList} from '../../data/Hooks/useTaskList';
 
 export function Home() {
   const [newTask, setNewTask] = useState('');
-  const [tasks, setTasks] = useState<ITask[]>([]);
+
+  const {addTask} = useTaskList();
 
   const handleNewTask = () => {
     const data = {
       id: String(new Date().getTime()),
-      title: newTask ? newTask : 'Tarefa Fazia',
+      title: newTask ? newTask : 'Task Vazia',
     };
 
-    setTasks([...tasks, data]);
+    addTask(data);
+    setNewTask('');
   };
 
   return (
@@ -35,6 +33,7 @@ export function Home() {
         <TextInput
           onChangeText={setNewTask}
           style={styles.input}
+          value={newTask}
           selectionColor="#EBA417"
           placeholder="Nova tarefa..."
           placeholderTextColor="#555"
@@ -46,7 +45,7 @@ export function Home() {
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
         <Text style={styles.titleTask}>Minhas Tarefas</Text>
-        <TaskList tasks={tasks} />
+        <TaskList />
       </View>
     </SafeAreaView>
   );
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     paddingHorizontal: 30,
-    paddingVertical: 50,
+    paddingVertical: 30,
   },
   title: {
     color: '#F1F1F1',
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     color: '#F1F1F1',
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 50,
+    marginTop: 40,
   },
   input: {
     backgroundColor: '#29292E',
