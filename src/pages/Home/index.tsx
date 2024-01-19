@@ -19,10 +19,11 @@ export function Home() {
   const handleNewTask = () => {
     const data = {
       id: String(new Date().getTime()),
-      title: newTask ? newTask : 'Tarefa Fazia',
+      title: newTask ? newTask : 'Task Vazia',
     };
 
     addTask(data);
+    setNewTask('');
   };
 
   return (
@@ -32,6 +33,7 @@ export function Home() {
         <TextInput
           onChangeText={setNewTask}
           style={styles.input}
+          value={newTask}
           selectionColor="#EBA417"
           placeholder="Nova tarefa..."
           placeholderTextColor="#555"
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     paddingHorizontal: 30,
-    paddingVertical: 50,
+    paddingVertical: 30,
   },
   title: {
     color: '#F1F1F1',
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     color: '#F1F1F1',
     fontSize: 24,
     fontWeight: 'bold',
-    marginVertical: 50,
+    marginTop: 40,
   },
   input: {
     backgroundColor: '#29292E',
