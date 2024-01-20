@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
 import {ITask} from '../../Types/ITasks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -21,7 +21,7 @@ export const TasksProvider = ({children}: IProps) => {
 
   useEffect(() => {
     async function loadTasks() {
-      const tasksList = await AsyncStorage.getItem(tasksKey);
+      const tasksList = await AsyncStorage?.getItem(tasksKey);
       if (tasksList) {
         setData([...JSON.parse(tasksList)]);
       }
