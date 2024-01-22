@@ -5,6 +5,7 @@ import {
   render,
   renderHook,
 } from '@testing-library/react-native';
+
 import {Home} from '../../src/pages/Home';
 import {useTaskList} from '../../src/data/Hooks/useTaskList';
 import {TasksProvider} from '../../src/data/Context/TasksContext';
@@ -61,9 +62,10 @@ describe('Home Page', () => {
     };
 
     act(() => fireEvent.changeText(inputNewTask, data.title));
-    await act(async () => await fireEvent.press(buttonAddTask));
+    await act(() => fireEvent.press(buttonAddTask));
 
     expect(result.current.tasks).toBeTruthy();
-    // expect(result.current.tasks.length).toEqual(1);
+    // expect(result.current.tasks[0].title).toEqual('task01');
+    // expect(result.current.tasks.length).toBe(1);
   });
 });
