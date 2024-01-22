@@ -32,6 +32,7 @@ export function TaskList() {
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <TouchableOpacity
+            testID="removeTask"
             onPress={() => handleRemoveTask(item.id)}
             key={item.id}
             style={styles.buttonTask}>
