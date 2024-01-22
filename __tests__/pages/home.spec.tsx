@@ -26,7 +26,14 @@ describe('Home Page', () => {
 
     await act(() => result.current.addTask(data));
 
+    const data2 = {
+      id: 'Task02',
+      title: 'Task02',
+    };
+
+    await act(() => result.current.addTask(data2));
+
     expect(result.current.tasks).toBeTruthy();
-    // expect(result.current.tasks.length).toEqual(1);
+    expect(result.current.tasks.length).toEqual(2);
   });
 });
