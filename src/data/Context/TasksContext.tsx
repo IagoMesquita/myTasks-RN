@@ -1,4 +1,4 @@
-import {createContext, useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import {ITask} from '../../Types/ITasks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -34,7 +34,7 @@ export const TasksProvider = ({children}: IProps) => {
     try {
       const newTaskList = [...data, task];
       setData(newTaskList);
-      await AsyncStorage.setItem(tasksKey, JSON.stringify(newTaskList));
+      await AsyncStorage?.setItem(tasksKey, JSON.stringify(newTaskList));
     } catch (error) {
       throw new Error(error as string);
     }
@@ -43,7 +43,7 @@ export const TasksProvider = ({children}: IProps) => {
   const removeTask = async (id: String) => {
     const newTaskList = data.filter(task => task.id !== id);
     setData(newTaskList);
-    await AsyncStorage.setItem(tasksKey, JSON.stringify(newTaskList));
+    await AsyncStorage?.setItem(tasksKey, JSON.stringify(newTaskList));
   };
 
   return (
