@@ -39,6 +39,7 @@ export function Home() {
           placeholderTextColor="#555"
         />
         <TouchableOpacity
+          testID="addButton"
           onPress={handleNewTask}
           activeOpacity={0.7}
           style={styles.button}>
