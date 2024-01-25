@@ -21,8 +21,7 @@ export const TasksProvider = ({children}: IProps) => {
 
   useEffect(() => {
     async function loadTasks() {
-      const tasksList = await AsyncStorage.getItem(tasksKey);
-      console.log('useEffect', tasksList);
+      const tasksList = await AsyncStorage?.getItem(tasksKey);
       if (tasksList) {
         setData([...JSON.parse(tasksList)]);
       }
@@ -32,16 +31,11 @@ export const TasksProvider = ({children}: IProps) => {
   }, []);
 
   const addTask = async (task: ITask) => {
-    console.log('Task:', task);
-    console.log('Task:', typeof task);
-    console.log('Data:', data);
-    console.log('Data:', typeof data);
     try {
       const newTaskList = [...data, task];
       setData(newTaskList);
-      await AsyncStorage.setItem(tasksKey, JSON.stringify(newTaskList));
+      await AsyncStorage?.setItem(tasksKey, JSON.stringify(newTaskList));
     } catch (error) {
-      console.log('AddTask', error);
       throw new Error(error as string);
     }
   };
@@ -49,7 +43,7 @@ export const TasksProvider = ({children}: IProps) => {
   const removeTask = async (id: String) => {
     const newTaskList = data.filter(task => task.id !== id);
     setData(newTaskList);
-    await AsyncStorage.setItem(tasksKey, JSON.stringify(newTaskList));
+    await AsyncStorage?.setItem(tasksKey, JSON.stringify(newTaskList));
   };
 
   return (
